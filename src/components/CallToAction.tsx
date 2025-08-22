@@ -12,7 +12,7 @@ const CallToAction = () => {
   ];
 
   return (
-    <section className="py-20 bg-gradient-card">
+    <section id="contact" className="py-20 bg-gradient-card">
       <div className="container mx-auto px-4">
         <Card className="max-w-5xl mx-auto bg-card border-border/50 shadow-strong">
           <CardContent className="p-12">

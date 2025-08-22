@@ -1,20 +1,14 @@
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero-agriculture.jpg";
-
 const Hero = () => {
-  return (
-    <section className="relative min-h-screen flex items-center justify-center bg-gradient-hero overflow-hidden">
+  return <section className="relative min-h-screen flex items-center justify-center bg-gradient-hero overflow-hidden">
       <div className="absolute inset-0 opacity-20">
-        <img 
-          src={heroImage} 
-          alt="Modern agricultural technology platform" 
-          className="w-full h-full object-cover"
-        />
+        <img src={heroImage} alt="Modern agricultural technology platform" className="w-full h-full object-cover" />
       </div>
       
       <div className="relative z-10 container mx-auto px-4 text-center">
         <div className="max-w-4xl mx-auto space-y-8">
-          <h1 className="text-5xl md:text-7xl font-bold text-primary-foreground leading-tight">
+          <h1 className="text-5xl md:text-7xl font-bold text-primary-foreground leading-tight text-center">
             Revolutionizing
             <span className="block bg-gradient-to-r from-harvest-gold to-primary-glow bg-clip-text text-transparent">
               Agricultural Trade
@@ -27,20 +21,8 @@ const Hero = () => {
             Empowering the agricultural ecosystem for a better tomorrow.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8">
-            <Button 
-              size="lg" 
-              className="bg-primary-foreground text-primary hover:bg-primary-foreground/90 px-8 py-4 text-lg font-semibold shadow-soft"
-            >
-              Join the Platform
-            </Button>
-            <Button 
-              variant="outline" 
-              size="lg"
-              className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10 px-8 py-4 text-lg font-semibold"
-            >
-              Learn More
-            </Button>
+          <div className="flex justify-center items-center pt-8">
+            
           </div>
         </div>
       </div>
@@ -50,8 +32,6 @@ const Hero = () => {
           <div className="w-1 h-3 bg-primary-foreground/50 rounded-full mt-2 animate-pulse"></div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default Hero;
