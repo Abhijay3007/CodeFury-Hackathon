@@ -11,6 +11,7 @@ export default defineConfig(({ mode }) => ({
     allowedHosts: [
       "codefury-hackathon.onrender.com"
     ],
+    base: "/",
   },
   plugins: [
     react(),
