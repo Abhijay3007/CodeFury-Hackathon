@@ -3,6 +3,10 @@ import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
 import { io } from "socket.io-client";
+// vite.config.ts
+
+
+
 
 const socket = io("wss://codefury-hackathon.onrender.com", {
   transports: ["websocket"],   // force WebSocket only

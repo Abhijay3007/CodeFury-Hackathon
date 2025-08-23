@@ -9,6 +9,8 @@
     "paths": {
       "@/*": ["./src/*"]
     },
+    "jsx": "react-jsx",   // 👈 important
+    "jsxImportSource": "react",
     "noImplicitAny": false,
     "noUnusedParameters": false,
     "skipLibCheck": true,
