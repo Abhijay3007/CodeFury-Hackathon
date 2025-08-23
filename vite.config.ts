@@ -2,6 +2,15 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
+import { io } from "socket.io-client";
+
+const socket = io("wss://codefury-hackathon.onrender.com", {
+  transports: ["websocket"],   // force WebSocket only
+});
+
+socket.on("connect", () => {
+  console.log("Connected:", socket.id);
+});
 
 
 // https://vitejs.dev/config/
