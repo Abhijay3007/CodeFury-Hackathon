@@ -6,6 +6,18 @@ import { Separator } from "@/components/ui/separator";
 import { ShoppingCart, Star } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import { useToast } from "@/hooks/use-toast";
+import { CertificationBadge } from "@/components/CertificationBadge";
+
+// Import product images
+import organicTomatoesImg from "@/assets/products/organic-tomatoes.jpg";
+import freshCarrotsImg from "@/assets/products/fresh-carrots.jpg";
+import greenLettuceImg from "@/assets/products/green-lettuce.jpg";
+import cucumberSeedsImg from "@/assets/products/cucumber-seeds.jpg";
+import cornSeedsImg from "@/assets/products/corn-seeds.jpg";
+import pepperSeedsImg from "@/assets/products/pepper-seeds.jpg";
+import gardenTractorImg from "@/assets/products/garden-tractor.jpg";
+import irrigationSystemImg from "@/assets/products/irrigation-system.jpg";
+import fertilizerSpreaderImg from "@/assets/products/fertilizer-spreader.jpg";
 
 const FarmerKit = () => {
   const { addToCart } = useCart();
@@ -35,25 +47,36 @@ const FarmerKit = () => {
           name: "Organic Tomatoes",
           price: "₹1,299",
           capacity: "5 lbs",
-          image: "https://images.unsplash.com/photo-1546470427-e28b47d1b3cd?w=400&h=300&fit=crop",
+          image: organicTomatoesImg,
           rating: 4.8,
-          inStock: true
+          inStock: true,
+          certifications: [
+            { name: "USDA Organic", type: "organic" as const, verified: true },
+            { name: "Non-GMO", type: "quality" as const, verified: true }
+          ]
         },
         {
           name: "Fresh Carrots",
           price: "₹850",
           capacity: "3 lbs",
-          image: "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=400&h=300&fit=crop",
+          image: freshCarrotsImg,
           rating: 4.6,
-          inStock: true
+          inStock: true,
+          certifications: [
+            { name: "Organic Certified", type: "organic" as const, verified: true },
+            { name: "Pesticide Free", type: "safety" as const, verified: true }
+          ]
         },
         {
           name: "Green Lettuce",
           price: "₹625",
           capacity: "2 lbs",
-          image: "https://images.unsplash.com/photo-1622206151226-18ca2c9ab4a1?w=400&h=300&fit=crop",
+          image: greenLettuceImg,
           rating: 4.4,
-          inStock: false
+          inStock: false,
+          certifications: [
+            { name: "Organic", type: "organic" as const, verified: true }
+          ]
         }
       ]
     },
@@ -64,25 +87,36 @@ const FarmerKit = () => {
           name: "Cucumber Seeds",
           price: "₹1,599",
           capacity: "50 seeds",
-          image: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=300&fit=crop",
+          image: cucumberSeedsImg,
           rating: 4.9,
-          inStock: true
+          inStock: true,
+          certifications: [
+            { name: "Certified Seeds", type: "quality" as const, verified: true },
+            { name: "High Yield", type: "quality" as const, verified: true }
+          ]
         },
         {
           name: "Corn Seeds",
           price: "₹2,250",
           capacity: "100 seeds",
-          image: "https://images.unsplash.com/photo-1551754655-cd27e38d2076?w=400&h=300&fit=crop",
+          image: cornSeedsImg,
           rating: 4.7,
-          inStock: true
+          inStock: true,
+          certifications: [
+            { name: "Premium Grade", type: "quality" as const, verified: true },
+            { name: "Hybrid Variety", type: "quality" as const, verified: true }
+          ]
         },
         {
           name: "Pepper Seeds",
           price: "₹1,875",
           capacity: "25 seeds",
-          image: "https://images.unsplash.com/photo-1583258292688-d0213dc5a3a8?w=400&h=300&fit=crop",
+          image: pepperSeedsImg,
           rating: 4.5,
-          inStock: true
+          inStock: true,
+          certifications: [
+            { name: "Disease Resistant", type: "quality" as const, verified: true }
+          ]
         }
       ]
     },
@@ -93,25 +127,37 @@ const FarmerKit = () => {
           name: "Garden Tractor",
           price: "₹2,49,900",
           capacity: "42-inch cutting deck",
-          image: "https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?w=400&h=300&fit=crop",
+          image: gardenTractorImg,
           rating: 4.8,
-          inStock: true
+          inStock: true,
+          certifications: [
+            { name: "ISO 9001", type: "iso" as const, verified: true },
+            { name: "Safety Certified", type: "safety" as const, verified: true },
+            { name: "CE Marked", type: "safety" as const, verified: true }
+          ]
         },
         {
           name: "Irrigation System",
           price: "₹89,999",
           capacity: "Covers 2 acres",
-          image: "https://images.unsplash.com/photo-1574263867128-a3d5c1b1deaa?w=400&h=300&fit=crop",
+          image: irrigationSystemImg,
           rating: 4.6,
-          inStock: true
+          inStock: true,
+          certifications: [
+            { name: "Water Efficient", type: "quality" as const, verified: true },
+            { name: "ISO 14001", type: "iso" as const, verified: true }
+          ]
         },
         {
           name: "Fertilizer Spreader",
           price: "₹34,950",
           capacity: "50 lb capacity",
-          image: "https://images.unsplash.com/photo-1574263867128-a3d5c1b1deaa?w=400&h=300&fit=crop",
+          image: fertilizerSpreaderImg,
           rating: 4.3,
-          inStock: false
+          inStock: false,
+          certifications: [
+            { name: "Quality Tested", type: "quality" as const, verified: false }
+          ]
         }
       ]
     }
@@ -177,6 +223,17 @@ const FarmerKit = () => {
                             <span className="text-sm text-muted-foreground">{product.rating}</span>
                           </div>
                         </CardTitle>
+                        
+                        {/* Certification Badges */}
+                        <div className="flex flex-wrap gap-1 mt-2">
+                          {product.certifications.map((cert, certIndex) => (
+                            <CertificationBadge
+                              key={certIndex}
+                              certification={cert}
+                              className="text-xs"
+                            />
+                          ))}
+                        </div>
                       </CardHeader>
                       
                       <CardContent className="space-y-4">

@@ -3,7 +3,7 @@ import Navigation from "@/components/Navigation";
 import ProblemStatement from "@/components/ProblemStatement";
 import Features from "@/components/Features";
 import Stats from "@/components/Stats";
-import CallToAction from "@/components/CallToAction";
+import Contact from "@/components/Contact";
 
 const Index = () => {
   return (
@@ -13,7 +13,7 @@ const Index = () => {
       <ProblemStatement />
       <Features />
       <Stats />
-      <CallToAction />
+      <Contact />
     </div>
   );
 };

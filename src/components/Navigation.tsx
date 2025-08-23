@@ -8,9 +8,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Leaf, ShoppingCart, Trash2 } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
+import { useAuth } from "@/hooks/useAuth";
 
 const Navigation = () => {
   const { cartItems, getTotalItems, removeFromCart } = useCart();
+  const { user, signOut } = useAuth();
   
   return (
     <nav className="fixed top-0 w-full bg-background/95 backdrop-blur-sm border-b border-border/50 z-50">
@@ -30,19 +32,11 @@ const Navigation = () => {
             <a href="/farmerkit" className="text-muted-foreground/80 hover:text-foreground transition-colors">
               FarmerKit
             </a>
+            <a href="/market-prices" className="text-muted-foreground/80 hover:text-foreground transition-colors">
+              Market Prices
+            </a>
             <a href="/about" className="text-muted-foreground/80 hover:text-foreground transition-colors">
               About
-            </a>
-            <a href="#contact" className="text-muted-foreground/80 hover:text-foreground transition-colors" onClick={(e) => {
-              e.preventDefault();
-              const contactSection = document.getElementById('contact');
-              if (contactSection) {
-                contactSection.scrollIntoView({ behavior: 'smooth' });
-              } else {
-                window.location.href = '/#contact';
-              }
-            }}>
-              Contact
             </a>
           </div>
           
@@ -93,10 +87,30 @@ const Navigation = () => {
               </DropdownMenuContent>
             </DropdownMenu>
 
-            {/* Sign In Button */}
-            <Button variant="ghost" className="text-muted-foreground/80 hover:text-foreground" asChild>
-              <a href="/signup">Sign In</a>
-            </Button>
+            {/* Auth Buttons */}
+            {user ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" className="text-muted-foreground/80 hover:text-foreground">
+                    Account
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem onClick={() => signOut()}>
+                    Sign Out
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <div className="flex gap-2">
+                <Button variant="ghost" className="text-muted-foreground/80 hover:text-foreground" asChild>
+                  <a href="/login">Sign In</a>
+                </Button>
+                <Button variant="ghost" className="text-muted-foreground/80 hover:text-foreground" asChild>
+                  <a href="/signup">Sign Up</a>
+                </Button>
+              </div>
+            )}
           </div>
         </div>
       </div>

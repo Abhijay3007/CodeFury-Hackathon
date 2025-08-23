@@ -8,6 +8,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Leaf } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
+import { useEffect } from "react";
 
 const loginSchema = z.object({
   email: z.string().email("Please enter a valid email"),
@@ -20,6 +22,15 @@ const Login = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
 
+  // Check if user is already logged in
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session) {
+        navigate("/");
+      }
+    });
+  }, [navigate]);
+
   const form = useForm<LoginForm>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -30,12 +41,24 @@ const Login = () => {
 
   const onSubmit = async (data: LoginForm) => {
     setIsLoading(true);
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    console.log("Login data:", data);
-    setIsLoading(false);
-    // Redirect to home page after successful login
-    navigate("/");
+    try {
+      const { error } = await supabase.auth.signInWithPassword({
+        email: data.email,
+        password: data.password,
+      });
+
+      if (error) {
+        throw error;
+      }
+
+      // Redirect to home page after successful login
+      window.location.href = "/";
+    } catch (error: any) {
+      console.error("Login error:", error.message);
+      // You can add toast notification here for error handling
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (

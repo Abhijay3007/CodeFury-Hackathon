@@ -8,6 +8,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Leaf } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
+import { useEffect } from "react";
 
 const signupSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -22,6 +24,15 @@ const Signup = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
 
+  // Check if user is already logged in
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session) {
+        navigate("/");
+      }
+    });
+  }, [navigate]);
+
   const form = useForm<SignupForm>({
     resolver: zodResolver(signupSchema),
     defaultValues: {
@@ -34,12 +45,34 @@ const Signup = () => {
 
   const onSubmit = async (data: SignupForm) => {
     setIsLoading(true);
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    console.log("Signup data:", data);
-    setIsLoading(false);
-    // Redirect to home page after successful signup
-    navigate("/");
+    try {
+      const redirectUrl = `${window.location.origin}/`;
+      
+      const { error } = await supabase.auth.signUp({
+        email: data.email,
+        password: data.password,
+        options: {
+          emailRedirectTo: redirectUrl,
+          data: {
+            name: data.name,
+            city: data.city,
+          },
+        },
+      });
+
+      if (error) {
+        throw error;
+      }
+
+      console.log("Signup successful! Check your email to confirm your account.");
+      // Redirect to home page after successful signup
+      window.location.href = "/";
+    } catch (error: any) {
+      console.error("Signup error:", error.message);
+      // You can add toast notification here for error handling
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
