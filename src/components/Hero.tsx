@@ -33,13 +33,12 @@ const Hero = () => {
             </Button>
             
             <Button 
-              variant="outline" 
-              size="lg"
-              className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 px-8 py-4 text-lg font-semibold"
+              size="lg" 
+              className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 text-lg font-semibold shadow-medium group"
               asChild
             >
-              <a href="/market-prices">
-                Market Prices
+              <a href="/farmerkit">
+                Market Price
               </a>
             </Button>
           </div>
