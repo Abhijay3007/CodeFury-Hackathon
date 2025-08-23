@@ -3,6 +3,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import { io } from "socket.io-client";
+import "./index.css";
 
 // ✅ Socket client should live in browser code, not vite.config.ts
 const socket = io("wss://codefury-hackathon.onrender.com", {
